@@ -22,9 +22,9 @@ fi
 
 # Restore artifacts from the previous build (if they exist).
 #
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+if [ -d /tmp/artifacts/.gradle ]; then
   echo "---> Restoring build artifacts..."
-  mv /tmp/artifacts/. ./
+  mv /tmp/artifacts/.gradle "$HOME"/
 fi
 
 echo "---> Installing application source..."
@@ -32,6 +32,7 @@ cp -Rf /tmp/src/. ./
 
 echo "---> Building application from source..."
 # TODO dynamic build parameters
+export GRADLE_OPTS="-Dorg.gradle.daemon=false"
 gradle build -x test
 
 echo "---> Copying built application to app-root..."
