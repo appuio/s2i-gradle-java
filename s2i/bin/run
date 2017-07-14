@@ -7,6 +7,4 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-# TODO flexible parameters
-# TODO exec vs PID 1 check
-exec java -Xmx64m -Xss1024k -jar /opt/app-root/app.jar
+exec java $JAVA_PARAMS -jar /opt/app-root/app.jar
